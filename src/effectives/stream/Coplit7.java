@@ -13,7 +13,7 @@ public class Coplit7 {
         if (isKimIncluded) {
             return names.stream()
                     .distinct()
-                    .filter(name -> String.valueOf(name.charAt(0)).equals("김"))
+                    .filter(name -> name.charAt(0)=='김') // startsWith("김");
                     .sorted()
                     .toArray(String[]::new);
         }

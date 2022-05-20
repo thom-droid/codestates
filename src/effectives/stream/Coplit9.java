@@ -12,6 +12,7 @@ public class Coplit9 {
     public static void main(String[] args) {
 
         String[] strArr = {"codestates", "java", "backend", "programming"};
+
         int output = findLongestLength(strArr);
         System.out.println(output); // 11 (가장 긴 문자열 : programming)
 
