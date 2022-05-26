@@ -1,4 +1,4 @@
-package ds;
+package ds.queue_stack;
 
 import java.util.Arrays;
 import java.util.LinkedList;

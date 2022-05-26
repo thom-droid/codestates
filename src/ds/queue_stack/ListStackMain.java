@@ -1,4 +1,4 @@
-package ds;
+package ds.queue_stack;
 
 public class ListStackMain {
 
