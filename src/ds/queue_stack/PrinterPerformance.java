@@ -104,6 +104,42 @@ public class PrinterPerformance {
         return time;
     }
 
+    private static int queuePrinter3(int bufferSize, int capacities, int[] documents) {
+
+        int time = 0;
+        int remainedCapacities = capacities;
+
+        ArrayDeque<Integer> workbench = new ArrayDeque<>(bufferSize);
+        LinkedList<Integer> documentQueue = Arrays.stream(documents).boxed().collect(Collectors.toCollection(LinkedList::new));
+
+        while (documentQueue.size() > 0) {
+            int work = documentQueue.peek();
+
+            // work is smaller than current capa
+            if (work <= remainedCapacities) {
+
+                work = documentQueue.poll();
+
+                if (workbench.size() != bufferSize) {
+                    workbench.add(work);
+                    remainedCapacities -= work;
+                    time++;
+                } else {
+                    remainedCapacities += workbench.poll();
+                    time++;
+                }
+
+            } else {
+                remainedCapacities += workbench.poll();
+                time++;
+            }
+
+            // otherwise
+
+        }
+
+
+    }
     public static void main(String[] args) {
 
         System.out.println(queuePrinter2(2, 12, new int[]{5,6,1,12,8,9,11}));
