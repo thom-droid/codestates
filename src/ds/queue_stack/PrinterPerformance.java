@@ -138,7 +138,7 @@ public class PrinterPerformance {
 
         }
 
-
+        return time;
     }
     public static void main(String[] args) {
 
