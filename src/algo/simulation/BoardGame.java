@@ -1,4 +1,4 @@
-package algo.greedy;
+package algo.simulation;
 
 public class BoardGame {
 
