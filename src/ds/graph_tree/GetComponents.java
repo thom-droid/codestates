@@ -41,8 +41,10 @@ public class GetComponents {
                 // vertices already visited are checked
                 // as a result of bfs method, isVisited looks like = [true, true, true, false, false, false]
                 // which means 0, 1, 2 vertices are connected, all adding up to a component
-                isVisited = bfs(matrix, isVisited, vertex);
+//                isVisited = bfs(matrix, isVisited, vertex);
+                isVisited = dfs(matrix, isVisited, vertex);
             }
+
         }
         return count;
     }
@@ -67,6 +69,22 @@ public class GetComponents {
                 }
             }
 
+        }
+
+        return isVisited;
+    }
+
+    private static boolean[] dfs(int[][] matrix, boolean[] isVisited, int from) {
+
+        // turn visited
+        isVisited[from] = true;
+
+        for (int to = 0; to < matrix[from].length; to++) {
+
+            // any edge that is caught in the loop, call dfs recursively
+            if (matrix[from][to] == 1 && !isVisited[to]) {
+                dfs(matrix, isVisited, to);
+            }
         }
 
         return isVisited;
