@@ -4,17 +4,18 @@ import java.util.ArrayList;
 
 public class Compress {
 
+    // 스트링 빌더는 동기화를 지원하지 않기 떄문에 static으로 선언하면 여러 메서드에서 호출하게 되면 문제가 될 수 있을 것 같다.
+    // 현재 문제는 간단하므로 사용해도 될 것 같다.
+    // 테스트가 여러 번 돌면서 리턴 값들이 중복되어서 안된다. 지역 변수로 선언하자.
     public static String compressString(String str) {
 
         if (str.length() == 0) {
             return str;
         }
 
+        // 스택으로 해볼까. 스택으로 담으면서 마지막 값이랑 같으면 그 다음이랑도 같은지
         StringBuilder sb = new StringBuilder();
         ArrayList<Character> stack = new ArrayList<>();
-
-        // 스택으로 해볼까. 스택으로 담으면서 마지막 값이랑 같으면 그 다음이랑도 같은지
-
         stack.add(str.charAt(0));
 
         for (int i = 1; i < str.length(); i++) {
@@ -29,23 +30,19 @@ public class Compress {
                 continue;
             }
 
-            int size = stack.size();
-
-            if (size >= 3) {
-                sb.append(size).append(first);
-            } else {
-
-                // 아니라면 있는 그대로 추가한다.
-                for (int j = 0; j < size; j++) {
-                    sb.append(first);
-                }
-            }
+            checkLeftNodesOfStack(stack, sb);
 
             // 스택을 비우고 next를 넣는다.
             stack.clear();
             stack.add(next);
         }
 
+        checkLeftNodesOfStack(stack, sb);
+
+        return sb.toString();
+    }
+
+    private static void checkLeftNodesOfStack(ArrayList<Character> stack, StringBuilder sb) {
         if (!stack.isEmpty()) {
             int size = stack.size();
             char el = stack.get(0);
@@ -57,9 +54,9 @@ public class Compress {
                     sb.append(el);
                 }
             }
+        } else {
+            System.out.println("this stack is empty");
         }
-
-        return sb.toString();
     }
 
     public static void main(String[] args) {
