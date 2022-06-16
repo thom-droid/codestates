@@ -10,7 +10,7 @@ public class PowerNumber {
             return 1;
         }
 
-        return base * power(base, exponent - 1);
+        return base * power(base, exponent - 1) % 94906249;
     }
 
     public static void main(String[] args) {
