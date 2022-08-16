@@ -70,6 +70,8 @@ public class PowerSet_Revision {
 
     private static String removeDuplicate(String str) {
         for (int i = 0; i < str.length(); i++) {
+            //TOdo
         }
+        return null;
     }
 }
